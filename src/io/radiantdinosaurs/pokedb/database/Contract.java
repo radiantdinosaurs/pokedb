@@ -10,16 +10,17 @@ public final class Contract {
     static final String USER = "root";
     static final String PASS = "cookiecat25";
 
-    public static final class PokemonTable {
-        public static String table_name = "pokemon";
-        public static String id = "id";
-        public static String types = "types";
-        public static String defense = "defense";
-        public static String attack = "attack";
-        public static String hp = "hp";
-        public static String special_defense = "special_defense";
-        public static String special_attack = "special_attack";
-        public static String speed = "speed";
+    public static class PokemonTable {
+        public static final String table_name = "pokemon";
+        public static final String id = "id";
+        public static final String name = "name";
+        public static final String types = "types";
+        public static final String defense = "defense";
+        public static final String attack = "attack";
+        public static final String hp = "hp";
+        public static final String special_defense = "special_defense";
+        public static final String special_attack = "special_attack";
+        public static final String speed = "speed";
 
     }
 

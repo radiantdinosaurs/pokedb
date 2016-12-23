@@ -1,10 +1,12 @@
 package io.radiantdinosaurs.pokedb.database;
 
+import io.radiantdinosaurs.pokedb.models.Pokemon;
+
 import java.sql.*;
 /**
  * Created by Bethany Corder on 12/16/2016.
  */
-public class JSONCreateAndPopulateTable {
+public class CreateDatabaseAndTables {
 
     private Connection conn = null;
     private Statement stmt = null;
@@ -58,7 +60,7 @@ public class JSONCreateAndPopulateTable {
         try(Connection conn = openConnection()) {
             System.out.println("Creating tables...");
             stmt = conn.createStatement();
-            String tableCreationStatement = "CREATE TABLE pokemon ( id INT PRIMARY KEY, types VARCHAR(255), defense INT, attack INT, hp INT, special_defense INT, special_attack INT, speed INT)";
+            String tableCreationStatement = "CREATE TABLE pokemon ( id INT PRIMARY KEY, name VARCHAR(255), types VARCHAR(255), defense INT, attack INT, hp INT, special_defense INT, special_attack INT, speed INT)";
             stmt.executeUpdate(tableCreationStatement);
             System.out.println("Created table in the database...");
         } catch (SQLException e) {
