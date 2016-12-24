@@ -1,22 +1,27 @@
 package io.radiantdinosaurs.pokedb;
 import io.radiantdinosaurs.pokedb.database.CreateDatabaseAndTables;
+import io.radiantdinosaurs.pokedb.database.DatabaseReader;
 import io.radiantdinosaurs.pokedb.database.DatabaseSeeder;
+import io.radiantdinosaurs.pokedb.gui.TableSortFilter;
+
+import java.util.Scanner;
 
 /**
- * Created by Bethany Corder on 12/12/2016.
+ * A simple database for Pokemon stats
  */
 public class PokeDbApp {
+
     public static void main(String[] args) {
         runProgram();
     }
 
-    public static void runProgram() {
+    private static void runProgram() {
         CreateDatabaseAndTables cpt = new CreateDatabaseAndTables();
         DatabaseSeeder ds = new DatabaseSeeder();
-        System.out.println("Creating a connection to the database...");
-        cpt.openInitialConnection();
+        DatabaseReader dq = new DatabaseReader();
         cpt.checkIfDatabaseExists();
-        cpt.checkIfTablesExistInDatabase();
-        ds.checkIfTablesAreFilled();
+        cpt.createTablesInDatabase();
+        ds.insertPokemonIntoDatabase();
+        new TableSortFilter();
     }
 }

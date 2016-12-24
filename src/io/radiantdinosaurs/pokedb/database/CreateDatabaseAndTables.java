@@ -1,17 +1,21 @@
 package io.radiantdinosaurs.pokedb.database;
 
-import io.radiantdinosaurs.pokedb.models.Pokemon;
-
 import java.sql.*;
+
 /**
- * Created by Bethany Corder on 12/16/2016.
+ * Handles creating the database and tables
+ * @author radiantdinosaurs
  */
 public class CreateDatabaseAndTables {
 
     private Connection conn = null;
     private Statement stmt = null;
 
-    public Connection openInitialConnection() {
+    /**
+     * Opens a connection to localhost
+     * @return connection to localhost
+     */
+    private Connection openInitialConnection() {
         try {
             conn = DriverManager.getConnection(Contract.URL, Contract.USER, Contract.PASS);
         } catch (SQLException e) {
@@ -20,7 +24,11 @@ public class CreateDatabaseAndTables {
         return conn;
     }
 
-    public Connection openConnection() {
+    /**
+     * Opens a connection to the database, pokedb
+     * @return connection to pokedb
+     */
+    Connection openConnection() {
         try {
             conn = DriverManager.getConnection(Contract.DB_URL, Contract.USER, Contract.PASS);
         } catch (SQLException e) {
@@ -29,26 +37,18 @@ public class CreateDatabaseAndTables {
         return conn;
     }
 
-    public void createDatabase() {
-        try(Connection conn = openInitialConnection()) {
-            stmt = conn.createStatement();
-            System.out.println("Creating database...");
-            String databaseCreationStatement = "CREATE DATABASE IF NOT EXISTS pokedb";
-            stmt.executeUpdate(databaseCreationStatement);
-            System.out.println("Database created successfully!");
-        } catch (SQLException e1) {
-            e1.printStackTrace();
-        }
-    }
-
+    /**
+     * Checks if the database exists
+     */
     public void checkIfDatabaseExists() {
         try (Connection conn = openInitialConnection()) {
             stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SHOW DATABASES LIKE 'pokedb'");
             boolean doesDatabaseExist = rs.next();
             if (doesDatabaseExist) {
-                System.out.println("Found the database!");
+                return;
             } else {
+                //Calls to create a database if the database is not found
                 createDatabase();
             }
         } catch (SQLException e) {
@@ -56,28 +56,29 @@ public class CreateDatabaseAndTables {
         }
     }
 
-    public void createTablesInDatabase() {
-        try(Connection conn = openConnection()) {
-            System.out.println("Creating tables...");
+    /**
+     * Creates the database, pokedb, if it does not exist
+     */
+    private void createDatabase() {
+        try(Connection conn = openInitialConnection()) {
             stmt = conn.createStatement();
-            String tableCreationStatement = "CREATE TABLE pokemon ( id INT PRIMARY KEY, name VARCHAR(255), types VARCHAR(255), defense INT, attack INT, hp INT, special_defense INT, special_attack INT, speed INT)";
-            stmt.executeUpdate(tableCreationStatement);
-            System.out.println("Created table in the database...");
-        } catch (SQLException e) {
-            e.printStackTrace();
+            String databaseCreationStatement = "CREATE DATABASE IF NOT EXISTS pokedb";
+            stmt.executeUpdate(databaseCreationStatement);
+        } catch (SQLException e1) {
+            e1.printStackTrace();
         }
     }
 
-    public void checkIfTablesExistInDatabase() {
+    /**
+     * Creates a table in the database
+     */
+    public void createTablesInDatabase() {
         try(Connection conn = openConnection()) {
-            DatabaseMetaData md = conn.getMetaData();
-            ResultSet rs = md.getTables(null, null, "POKEMON", null);
-            if(rs.next()) {
-                System.out.println("Found the tables!");
-            }
-            else {
-                createTablesInDatabase();
-            }
+            stmt = conn.createStatement();
+            String tableCreationStatement = "CREATE TABLE IF NOT EXISTS pokemon ( id INT PRIMARY KEY, " +
+                    "name VARCHAR(255), types VARCHAR(255), defense INT, attack INT, hp INT, special_defense INT, " +
+                    "special_attack INT, speed INT)";
+            stmt.executeUpdate(tableCreationStatement);
         } catch (SQLException e) {
             e.printStackTrace();
         }

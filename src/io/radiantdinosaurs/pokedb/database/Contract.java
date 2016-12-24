@@ -1,9 +1,10 @@
 package io.radiantdinosaurs.pokedb.database;
 
 /**
- * Created by Bethany Corder on 12/14/2016.
+ * Database information
+ * @author radiantdinosaurs
  */
-public final class Contract {
+final class Contract {
 
     static final String URL = "jdbc:mysql://localhost:3306/";
     static final String DB_URL = "jdbc:mysql://localhost:3306/pokedb";
