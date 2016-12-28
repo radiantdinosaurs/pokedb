@@ -7,6 +7,9 @@ import org.json.simple.JSONObject;
 import static java.lang.Math.toIntExact;
 
 /**
+ * TODO: this class could probably be renamed to better represent what it's doing
+ * - Andrew
+ *
  * Parses JSON objects into Pokemon objects
  * @author radiantdinosaurs
  */

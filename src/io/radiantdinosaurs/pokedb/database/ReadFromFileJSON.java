@@ -10,7 +10,9 @@ import java.io.IOException;
  * @author radiantdinosaurs
  */
 class ReadFromFileJSON {
-
+    //
+    // TODO: the naming convention for static constants is UPPERCASE_WITH_UNDERSCORES
+    // - Andrew
     private static final String jsonFilePath = "C:\\Users\\Bethany Corder\\Google Drive\\Coding Projects\\" +
             "IntelliJ IDEA Projects\\PokeDB\\src\\io\\radiantdinosaurs\\pokedb\\assets\\pokemon.json";
     /**

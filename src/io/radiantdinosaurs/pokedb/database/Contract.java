@@ -11,6 +11,17 @@ final class Contract {
     static final String USER = "root";
     static final String PASS = "cookiecat25";
 
+    /**
+     * TODO: doesn't seem like these constants are used anywhere.
+     * You want to use this PokemonTable contract wherever the values are required
+     * such as in CreateDatabaseAndTables#createTablesInDatabase.
+     *
+     * Otherwise, it's just a redundant class.
+     *
+     * The benefit to contract classes in a centralized schema that your entire program can use
+     *
+     * - Andrew
+     */
     public static class PokemonTable {
         public static final String table_name = "pokemon";
         public static final String id = "id";

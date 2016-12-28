@@ -11,6 +11,8 @@ import java.sql.*;
 public class DatabaseSeeder {
 
     private PreparedStatement ps = null;
+    // TODO: consider applying a modifier to this class
+    // TODO: same comments about this class as in DatabaseReader
     CreateDatabaseAndTables cpt = new CreateDatabaseAndTables();
 
     /**
@@ -28,8 +30,14 @@ public class DatabaseSeeder {
             for(Object key : jsonObject.keySet()) {
                 pokemon = ParseObjectJSON.createPokemonFromJson(key, jsonObject);
                 //IGNORE will ignore the particular insert if the Pokemon already exists in the table
+                //
+                // TODO: use the constants from the Contract class
+                // - Andrew
                 String sql = "INSERT IGNORE INTO pokemon (id,name,types,defense,attack,hp,special_defense," +
                         "special_attack, speed) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?);";
+
+                // TODO: consider breaking this logic out into its own method
+                // - Andrew
                 ps = conn.prepareStatement(sql);
                 ps.setInt(1, id);
                 ps.setString(2, pokemon.getName());

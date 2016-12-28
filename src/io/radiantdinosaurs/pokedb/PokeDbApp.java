@@ -7,10 +7,15 @@ import io.radiantdinosaurs.pokedb.gui.TableSortFilter;
 import java.util.Scanner;
 
 /**
+ * TODO: provide a better description for this app. This app isn't exactly a database, though it does use one.
  * A simple database for Pokemon stats
  */
 public class PokeDbApp {
 
+    /**
+     * TODO: given that this class only has one other method besides the main method, it's not necessary to keep
+     * that logic separated.
+     */
     public static void main(String[] args) {
         runProgram();
     }
