@@ -7,13 +7,10 @@ import org.json.simple.JSONObject;
 import static java.lang.Math.toIntExact;
 
 /**
- * TODO: this class could probably be renamed to better represent what it's doing
- * - Andrew
- *
  * Parses JSON objects into Pokemon objects
  * @author radiantdinosaurs
  */
-class ParseObjectJSON {
+class ParseJSONObjectToPokemonObject {
 
     /**
      * Creates a Pokemon object from a JSON object
@@ -71,7 +68,7 @@ class ParseObjectJSON {
         int length = pokemonTypesJsonArray.size();
         String[] typesStringArray = new String[length];
         for(int i = 0; i < length; i++) {
-            typesStringArray[i] = (String) pokemonTypesJsonArray.get(i);
+            typesStringArray[i] = pokemonTypesJsonArray.get(i).toString();
         }
         return typesStringArray;
     }

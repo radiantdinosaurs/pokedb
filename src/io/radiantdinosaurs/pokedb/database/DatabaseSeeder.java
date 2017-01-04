@@ -1,6 +1,7 @@
 package io.radiantdinosaurs.pokedb.database;
 
 import io.radiantdinosaurs.pokedb.models.Pokemon;
+import io.radiantdinosaurs.pokedb.models.Type;
 import org.json.simple.JSONObject;
 import java.sql.*;
 
@@ -10,17 +11,16 @@ import java.sql.*;
  */
 public class DatabaseSeeder {
 
-    private PreparedStatement ps = null;
     // TODO: consider applying a modifier to this class
-    // TODO: same comments about this class as in DatabaseReader
-    CreateDatabaseAndTables cpt = new CreateDatabaseAndTables();
 
     /**
      * Seeds the database with Pokemon
      */
     public void insertPokemonIntoDatabase() {
         Pokemon pokemon;
-        try(Connection conn = cpt.openConnection()) {
+        Type types;
+        try {
+            Connection conn = ConnectionManager.openConnection();
             //Getting an object from the JSON file
             Object parsedJsonFile = ReadFromFileJSON.parseJson();
             //Casting the object to a JSON object
@@ -28,20 +28,27 @@ public class DatabaseSeeder {
             int id = 1;
             //Iterating through the JSON object and inserting the Pokemon's information into the database
             for(Object key : jsonObject.keySet()) {
-                pokemon = ParseObjectJSON.createPokemonFromJson(key, jsonObject);
+                pokemon = ParseJSONObjectToPokemonObject.createPokemonFromJson(key, jsonObject);
                 //IGNORE will ignore the particular insert if the Pokemon already exists in the table
-                //
-                // TODO: use the constants from the Contract class
-                // - Andrew
-                String sql = "INSERT IGNORE INTO pokemon (id,name,types,defense,attack,hp,special_defense," +
-                        "special_attack, speed) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?);";
+                String sql = "INSERT IGNORE INTO " +
+                        Contract.DB_NAME + "." +
+                        Contract.PokemonTable.TABLE_NAME + " (" +
+                        Contract.PokemonTable.ID + ", " +
+                        Contract.PokemonTable.NAME + ", " +
+                        Contract.PokemonTable.TYPES + " , " +
+                        Contract.PokemonTable.DEFENSE + ", " +
+                        Contract.PokemonTable.ATTACK + " , " +
+                        Contract.PokemonTable.HP + " " + ", " +
+                        Contract.PokemonTable.SPECIAL_DEFENSE + "," +
+                        Contract.PokemonTable.SPECIAL_ATTACK + " , " +
+                        Contract.PokemonTable.SPEED + ") VALUES (?,?, ?, ?, ?, ?, ?, ?, ?);";
 
                 // TODO: consider breaking this logic out into its own method
                 // - Andrew
-                ps = conn.prepareStatement(sql);
+                PreparedStatement ps = conn.prepareStatement(sql);
                 ps.setInt(1, id);
                 ps.setString(2, pokemon.getName());
-                ps.setString(3, pokemon.typesToString());
+                ps.setString(3, pokemon.convertTypesToString());
                 ps.setInt(4, pokemon.getDefense());
                 ps.setInt(5, pokemon.getAttack());
                 ps.setInt(6, pokemon.getHp());

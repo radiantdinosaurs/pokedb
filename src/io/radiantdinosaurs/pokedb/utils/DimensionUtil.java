@@ -1,15 +1,13 @@
 package io.radiantdinosaurs.pokedb.utils;
 
 /**
- * Created by Bethany Corder on 12/13/2016.
+ * Contains functions needed to resize GUI components based on monitor dimensions
+ * @author radiantdinosaurs
  */
 public class DimensionUtil {
-    public static final int BASELINE_FONT_SIZE = 12;
-    public static final int BASELINE_WIDTH = 1280;
-    public static final int BASELINE_HEIGHT = 720;
-
-    public static final int FONT_SCALING_FACTOR = 150;
-    public static final int WINDOW_SCALING_FACTOR = 2;
+    private static final int BASELINE_FONT_SIZE = 12;
+    private static final int BASELINE_WIDTH = 1280;
+    private static final int BASELINE_HEIGHT = 720;
 
     private DimensionUtil() {
     }
@@ -24,9 +22,5 @@ public class DimensionUtil {
         }
 
         return (int)(BASELINE_FONT_SIZE * ratio);
-    }
-
-    public static int computerComponentSize(int targetLength, int targetPercent) {
-        return targetLength * targetPercent;
     }
 }

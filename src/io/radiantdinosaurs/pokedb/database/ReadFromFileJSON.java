@@ -10,10 +10,8 @@ import java.io.IOException;
  * @author radiantdinosaurs
  */
 class ReadFromFileJSON {
-    //
-    // TODO: the naming convention for static constants is UPPERCASE_WITH_UNDERSCORES
-    // - Andrew
-    private static final String jsonFilePath = "C:\\Users\\Bethany Corder\\Google Drive\\Coding Projects\\" +
+
+    private static final String JSON_FILE_PATH = "C:\\Users\\Bethany Corder\\Google Drive\\Coding Projects\\" +
             "IntelliJ IDEA Projects\\PokeDB\\src\\io\\radiantdinosaurs\\pokedb\\assets\\pokemon.json";
     /**
      * Parses the Pokemon JSON file into an object
@@ -23,7 +21,7 @@ class ReadFromFileJSON {
         JSONParser parser = new JSONParser();
         Object parsedJsonFile = null;
         try {
-            parsedJsonFile = parser.parse(new FileReader(jsonFilePath));
+            parsedJsonFile = parser.parse(new FileReader(JSON_FILE_PATH));
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }

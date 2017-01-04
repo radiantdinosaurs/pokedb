@@ -1,32 +1,19 @@
 package io.radiantdinosaurs.pokedb;
-import io.radiantdinosaurs.pokedb.database.CreateDatabaseAndTables;
-import io.radiantdinosaurs.pokedb.database.DatabaseReader;
-import io.radiantdinosaurs.pokedb.database.DatabaseSeeder;
-import io.radiantdinosaurs.pokedb.gui.TableSortFilter;
-
-import java.util.Scanner;
+import io.radiantdinosaurs.pokedb.database.*;
+import io.radiantdinosaurs.pokedb.gui.PokemonStatsTableWithSearchView;
 
 /**
- * TODO: provide a better description for this app. This app isn't exactly a database, though it does use one.
- * A simple database for Pokemon stats
+ * A simple program that uses a database to list (and allow the user to filter) the names, types, and stats of Pokemon.
  */
 public class PokeDbApp {
 
-    /**
-     * TODO: given that this class only has one other method besides the main method, it's not necessary to keep
-     * that logic separated.
-     */
     public static void main(String[] args) {
-        runProgram();
-    }
-
-    private static void runProgram() {
-        CreateDatabaseAndTables cpt = new CreateDatabaseAndTables();
+        CreateDatabase cd = new CreateDatabase();
+        CreateTables ct = new CreateTables();
         DatabaseSeeder ds = new DatabaseSeeder();
-        DatabaseReader dq = new DatabaseReader();
-        cpt.checkIfDatabaseExists();
-        cpt.createTablesInDatabase();
+        cd.createDatabase();
+        ct.createTablesInDatabase();
         ds.insertPokemonIntoDatabase();
-        new TableSortFilter();
+        new PokemonStatsTableWithSearchView();
     }
 }
