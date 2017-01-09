@@ -18,7 +18,6 @@ public class DatabaseSeeder {
      */
     public void insertPokemonIntoDatabase() {
         Pokemon pokemon;
-        Type types;
         try {
             Connection conn = ConnectionManager.openConnection();
             //Getting an object from the JSON file

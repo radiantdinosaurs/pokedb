@@ -25,7 +25,7 @@ class ParseJSONObjectToPokemonObject {
         //Creating a Pokemon object
         Pokemon pokemon = new Pokemon();
         pokemon.setName(pokemonName);
-        pokemon.setTypes(getTypesFrom(pokemonInformation.get("types")));
+        pokemon.setTypes(getTypesFrom((JSONArray) pokemonInformation.get("types")));
         //Getting the stats (attack, hp, etc.) from the Pokemon's information
         JSONObject pokemonStats = (JSONObject) pokemonInformation.get("stats");
         Long attack = (Long) pokemonStats.get("attack");
@@ -48,8 +48,8 @@ class ParseJSONObjectToPokemonObject {
      * @param pokemonTypes contains the Pokemon's types
      * @return array of the Pokemon's types
      */
-    private static Type[] getTypesFrom(Object pokemonTypes) {
-        String[] typesStringArray = getStringArray((JSONArray) pokemonTypes);
+    private static Type[] getTypesFrom(JSONArray pokemonTypes) {
+        String[] typesStringArray = getStringArray(pokemonTypes);
         Type[] types = new Type[typesStringArray.length];
         for(int i = 0; i < types.length; i++) {
             Type type = new Type();
